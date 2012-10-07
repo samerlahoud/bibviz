@@ -1,5 +1,5 @@
 #!/usr/local/bin/python
-# python bib-graph-v4.py "./data/Biblio-perso-globale.bib" 2005 2012
+# python bib-graph-v4.py input_file.bib min_year max_year
 
 import sys
 import yapbib.biblist as biblist
@@ -64,13 +64,13 @@ for year_iter in range(max_year_input, min_year_input-1, -1):
 	plt.ylim(ymin-ddy,ymax+ddy)
 	plt.title('Bibliography Graph %s' %year_iter)
 	plt.axis('off')
-	plt.savefig("./output/biblio-perso-globale%s.png" %year_iter)  # save as png
+	plt.savefig("bib-graph%s.png" %year_iter)  # save as png
 	# nx.write_dot(bib_graph, './output/biblio-perso-globale.dot')
 	# nx.write_gml(bib_graph, './output/biblio-perso-globale.gml')
 	# nx.write_graphml(bib_graph, './output/biblio-perso-globale.graphml')
 	#plt.show() # display
 	
-input = "./output/biblio-perso-globale????.png"
-output = "./output/bibliography-animation.gif"
+input = "bib-graph????.png"
+output = "bib-animation.gif"
 os.system("convert -delay 100 -loop 0 %s %s" % (input, output))
     
