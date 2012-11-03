@@ -12,7 +12,7 @@ min_year_input=int(sys.argv[2])
 max_year_input=int(sys.argv[3])
 
 bib_handle=biblist.BibList()
-bib_handle.import_bibtex(bibfile_input)
+bib_handle.import_bibtex(bibfile_input, normalize=False)
 
 items= bib_handle.List() # Shows the keys of all entries
 
@@ -64,11 +64,16 @@ for year_iter in range(max_year_input, min_year_input-1, -1):
 	plt.ylim(ymin-ddy,ymax+ddy)
 	plt.title('Bibliography Graph %s' %year_iter)
 	plt.axis('off')
+<<<<<<< HEAD
 	plt.savefig("bib-graph%s.png" %year_iter)  # save as png
 	# nx.write_dot(bib_graph, './output/biblio-perso-globale.dot')
 	# nx.write_gml(bib_graph, './output/biblio-perso-globale.gml')
 	# nx.write_graphml(bib_graph, './output/biblio-perso-globale.graphml')
 	#plt.show() # display
+=======
+	plt.savefig("./output/biblio-perso-globale%s.png" %year_iter)  # save as png
+	nx.write_graphml(bib_graph, './output/biblio-perso-globale%s.graphml' %year_iter)
+>>>>>>> biblio double entry
 	
 input = "bib-graph????.png"
 output = "bib-animation.gif"
