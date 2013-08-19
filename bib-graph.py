@@ -1,5 +1,5 @@
 #!/usr/local/bin/python
-# python bib-graph-v4.py input_file.bib min_year max_year
+# python bib-graph.py input_file.bib min_year max_year
 
 import sys
 import yapbib.biblist as biblist
