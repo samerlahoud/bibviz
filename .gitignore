@@ -5,3 +5,5 @@ bib-graph-v2.py
 bib-graph-v3.py
 
 .gitignore
+
+.DS_Store
