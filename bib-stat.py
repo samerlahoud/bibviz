@@ -1,5 +1,5 @@
 #!/usr/local/bin/python
-# python bib-stat-v1.py "./data/Biblio-perso-globale.bib" 2005 2011
+# python bib-stat-v1.py "../data/Biblio-perso-globale.bib" 2005 2013
 
 import sys
 import yapbib.biblist as biblist
