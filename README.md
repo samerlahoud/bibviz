@@ -10,7 +10,7 @@ What you need is simply a clean installation of some python tools:
 and my source code available on this page !
 
 Take a look on this blog post for details:
-http://addroute.lahoud.fr/2012/10/bibliography-visualisation/
+http://wiki.lahoud.fr/doku.php?id=bibliography_visualization
 
 Example
 =======
