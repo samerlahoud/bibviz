@@ -1,6 +1,6 @@
 #!//anaconda/bin/python
 # python bib-graph.py input_file.bib min_year max_year
-# Example: python bib-graph.py "../data/Biblio-perso-globale.bib" 2005 2013
+# Example: python bib-graph.py "../data/Biblio-perso-globale-fr.bib" 2005 2015
 
 import sys
 import yapbib.biblist as biblist
@@ -36,14 +36,23 @@ for year_iter in range(max_year_input, min_year_input-1, -1):
 					bib_graph[clean_author_handle][clean_next_author_handle]['weight'] = bib_graph[clean_author_handle][clean_next_author_handle]['weight'] + 1
 				else:
 					bib_graph.add_edge(clean_author_handle, clean_next_author_handle, weight = 1)
+	
+	# bib_graph is bidirectional but edge list of a node gives only one of the incident edges	
+	for n in bib_graph:
+		temp_node_weight = 0
+		for e in bib_graph.edges_iter(n):
+			if e in bib_graph.edges():
+				temp_node_weight = temp_node_weight + nx.get_edge_attributes(bib_graph,'weight')[e]
+			else:
+				temp_node_weight = temp_node_weight + nx.get_edge_attributes(bib_graph,'weight')[e[1],e[0]]
+		bib_graph.node[n]['weight'] = temp_node_weight
 		
-	node_weight=[]
-	edge_weight = [data.values()[0] for a,b,data in bib_graph.edges(data=True)]
-	for n in range(0,len(bib_graph)):
-		node_weight.append(0)
-		for e in nx.edges_iter(bib_graph, bib_graph.nodes()[n]):
-			node_weight[n] = node_weight[n] + bib_graph.get_edge_data(e[0],e[1]).values()[0]
-	node_weight = [n*2.5 for n in node_weight]
+	node_weight=[data.values()[0]*2.5 for n,data in bib_graph.nodes(data=True)]
+	edge_weight = [data.values()[0] for a,b,data in bib_graph.edges(data=True)] 
+ 
+	data = json_graph.node_link_data(bib_graph)
+	json_output_file = open("../output/json-graph%s.json" %year_iter, 'w')	
+	json_output_file.write(str(data))
 	
 	fig = plt.figure(1, figsize=(8, 8))
 	if year_iter == max_year_input:
