@@ -31,6 +31,7 @@ for year_iter in range(max_year_input, min_year_input-1, -1):
 			continue
 			
 		for author_index, author_handle in enumerate(item_handle.get_authorsList()[:len(item_handle.get_authorsList())-1]):
+			#print author_handle
 			clean_author_handle = str(author_handle)
 			firstname_initial = clean_author_handle.split()[0][0]
 			lastname = clean_author_handle.split()[-1]
@@ -61,12 +62,12 @@ for year_iter in range(max_year_input, min_year_input-1, -1):
 	data = json_graph.node_link_data(bib_graph)
 	json_output_file = open("../output/json-graph%s.json" %year_iter, 'w')	
 	json_output_file.write(str(data))
-	nx.write_dot(bib_graph,"../output/dot-graph%s.dot" %year_iter)
+	nx.drawing.nx_agraph.write_dot(bib_graph,"../output/dot-graph%s.dot" %year_iter)
 	nx.write_gml(bib_graph,"../output/gml-graph%s.gml" %year_iter)
 	
 	fig = plt.figure(1, figsize=(8, 8))
 	if year_iter == max_year_input:
-		init_pos=nx.pydot_layout(bib_graph)
+		init_pos=nx.nx_pydot.pydot_layout(bib_graph)
 	for node in bib_graph:
 		pos[node] = init_pos[node]
 	nx.draw_networkx(bib_graph, pos, node_size=node_weight, node_color=node_weight, edge_color=edge_weight, cmap=plt.cm.OrRd, font_size=9)
@@ -89,7 +90,7 @@ for year_iter in range(max_year_input, min_year_input-1, -1):
 	
 	fig = plt.figure(1, figsize=(10, 10))
 	plt.axis('off')
-	pos=nx.drawing.graphviz_layout(bib_graph)
+	pos=nx.drawing.nx_agraph.graphviz_layout(bib_graph)
 	node_color=[c*10 for c in nx.core_number(bib_graph).values()]
 #	for node in bib_graph:
 #		pos[node]=(pos[node][0]*10, pos[node][1]*10)
