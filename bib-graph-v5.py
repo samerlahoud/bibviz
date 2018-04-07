@@ -97,7 +97,7 @@ for year_iter in range(max_year_input, min_year_input-1, -1):
 	nx.draw_networkx(bib_graph, pos, node_size=node_weight, node_color=node_color, edge_color=edge_weight, alph=0.5, cmap=plt.cm.OrRd, font_size=11, font_family='arial')
 	plt.title('Bibliography Graph %s' %year_iter)
 	mpld3.plugins.connect(fig)
-	mpld3.save_html(fig, html_fig)				
+	#mpld3.save_html(fig, html_fig)				
 	# Uncomment for more output formats
 	#nx.write_graphml(bib_graph, './output/biblio-perso-globale%s.graphml' %year_iter)
 	#nx.write_gml(bib_graph, './output/biblio-perso-globale.gml')
